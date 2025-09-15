@@ -1,0 +1,43 @@
+import 'package:doc_doc_app/core/networking/api_constants.dart';
+import 'package:doc_doc_app/core/networking/dio_factory.dart';
+import 'package:doc_doc_app/features/login/data/models/login_response_model.dart';
+import 'package:doc_doc_app/features/register/models/register_request_body_model.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+class RegisterProvider extends ChangeNotifier {
+  final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passwordConfirmationController = TextEditingController();
+
+  bool isLoading = false;
+  void register() async {
+    if (formKey.currentState!.validate()) {
+      isLoading = true;
+      notifyListeners();
+      final body = RegisterRequestBodyModel(
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        gender: 0,
+        password: passwordController.text,
+        passwordConfirmation: passwordConfirmationController.text,
+      );
+      try {
+        final response = await DioFactory.postData(
+          ApiConstants.register,
+          data: body.toJson(),
+        );
+        final data = LoginResponseModel.fromJson(response.data);
+        Fluttertoast.showToast(msg: data.message);
+      } catch (e) {
+        Fluttertoast.showToast(msg: 'Failed to register account');
+      }
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+}

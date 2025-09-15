@@ -6,12 +6,14 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final String? Function(String? value)? validator;
   final bool obscureText;
+  final TextInputType? keyboardType;
   const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
     this.validator,
     this.obscureText = false,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -43,6 +45,7 @@ class CustomTextField extends StatelessWidget {
       ),
       obscureText: obscureText,
       validator: validator,
+      keyboardType: keyboardType,
     );
   }
 }

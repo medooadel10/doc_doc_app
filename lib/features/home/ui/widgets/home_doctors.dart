@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_doc_app/core/style/app_colors.dart';
 import 'package:doc_doc_app/features/home/logic/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +40,15 @@ class HomeDoctors extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
+                      color: AppColors.text50Color,
                     ),
-                    child: Image.network(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP9VcMn-KypOVElikk37BvVvHZHMnoOO44Lg&s',
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP9VcMn-KypOVElikk37BvVvHZHMnoOO44Lg&s',
                       fit: BoxFit.cover,
+                      errorWidget: (context, url, error) {
+                        return Icon(Icons.error, color: Colors.black);
+                      },
                     ),
                   ),
                   Expanded(
@@ -72,7 +78,7 @@ class HomeDoctors extends StatelessWidget {
                 ],
               ),
               separatorBuilder: (context, index) => SizedBox(height: 14),
-              itemCount: value.doctors.length,
+              itemCount: 6,
             ),
           ],
         );

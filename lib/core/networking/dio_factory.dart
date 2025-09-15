@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:doc_doc_app/core/networking/api_constants.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
   static late Dio _dio;
@@ -14,6 +15,16 @@ class DioFactory {
         connectTimeout: duration,
       ),
     );
+    _dio.interceptors.add(
+      PrettyDioLogger(
+        requestBody: true,
+        request: true,
+        responseBody: true,
+        requestHeader: true,
+        error: true,
+        enabled: true,
+      ),
+    );
   }
 
   static Future<Response<dynamic>> postData(
@@ -21,6 +32,14 @@ class DioFactory {
     Map<String, dynamic>? data,
   }) async {
     final response = await _dio.post(path, data: data);
+    return response;
+  }
+
+  static Future<Response<dynamic>> getData(String path, {String? token}) async {
+    final response = await _dio.get(
+      path,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
     return response;
   }
 }

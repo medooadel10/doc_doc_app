@@ -1,4 +1,5 @@
 import 'package:doc_doc_app/core/router/routes.dart';
+import 'package:doc_doc_app/features/home/logic/home_provider.dart';
 import 'package:doc_doc_app/features/home/ui/home_screen.dart';
 import 'package:doc_doc_app/features/login/logic/login_provider.dart';
 import 'package:doc_doc_app/features/login/ui/login_screen.dart';
@@ -31,7 +32,12 @@ class AppRoute {
           ),
         );
       case Routes.home:
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+        return MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider(
+            create: (context) => HomeProvider()..getAllSpecializations(),
+            child: HomeScreen(),
+          ),
+        );
       default:
         return MaterialPageRoute(builder: (context) => Container());
     }

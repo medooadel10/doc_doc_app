@@ -1,4 +1,5 @@
 import 'package:doc_doc_app/features/home/ui/widgets/home_banner.dart';
+import 'package:doc_doc_app/features/home/ui/widgets/home_doctors.dart';
 import 'package:doc_doc_app/features/home/ui/widgets/home_header.dart';
 import 'package:doc_doc_app/features/home/ui/widgets/home_specializations.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 10),
               HomeBanner(),
               HomeSpecializations(),
+              HomeDoctors(),
             ],
           ),
         ),

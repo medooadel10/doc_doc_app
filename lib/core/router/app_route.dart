@@ -34,7 +34,9 @@ class AppRoute {
       case Routes.home:
         return MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider(
-            create: (context) => HomeProvider()..getAllSpecializations(),
+            create: (context) => HomeProvider()
+              ..getAllSpecializations()
+              ..getAllDoctors(),
             child: HomeScreen(),
           ),
         );

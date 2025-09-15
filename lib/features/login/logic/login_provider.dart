@@ -1,6 +1,7 @@
 import 'package:doc_doc_app/core/local_storage/shared_prefereneces_helper.dart';
 import 'package:doc_doc_app/core/networking/api_constants.dart';
 import 'package:doc_doc_app/core/networking/dio_factory.dart';
+import 'package:doc_doc_app/core/router/routes.dart';
 import 'package:doc_doc_app/features/login/data/models/login_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,7 +12,7 @@ class LoginProvider extends ChangeNotifier {
   final passwordController = TextEditingController();
 
   bool isLoading = false;
-  void login() async {
+  void login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
@@ -27,6 +28,11 @@ class LoginProvider extends ChangeNotifier {
         final data = LoginResponseModel.fromJson(json);
         await SharedPreferenecesHelper.setString('token', data.data.token);
         Fluttertoast.showToast(msg: data.message);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.home,
+          (route) => false,
+        );
         // Navigate to home screen
       } catch (e) {
         Fluttertoast.showToast(msg: 'Credentails don\'t correct');

@@ -1,6 +1,7 @@
 import 'package:doc_doc_app/core/local_storage/shared_prefereneces_helper.dart';
 import 'package:doc_doc_app/core/networking/api_constants.dart';
 import 'package:doc_doc_app/core/networking/dio_factory.dart';
+import 'package:doc_doc_app/core/router/routes.dart';
 import 'package:doc_doc_app/features/login/data/models/login_response_model.dart';
 import 'package:doc_doc_app/features/register/models/register_request_body_model.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class RegisterProvider extends ChangeNotifier {
   final passwordConfirmationController = TextEditingController();
 
   bool isLoading = false;
-  void register() async {
+  void register(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
@@ -35,6 +36,11 @@ class RegisterProvider extends ChangeNotifier {
         final data = LoginResponseModel.fromJson(response.data);
         await SharedPreferenecesHelper.setString('token', data.data.token);
         Fluttertoast.showToast(msg: data.message);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.home,
+          (route) => false,
+        );
       } catch (e) {
         Fluttertoast.showToast(msg: 'Failed to register account');
       }

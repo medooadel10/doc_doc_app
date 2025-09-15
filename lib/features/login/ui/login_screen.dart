@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                               }
                               return CustomButton(
                                 onPressed: () {
-                                  provider.login();
+                                  provider.login(context);
                                 },
                                 text: 'Login',
                               );

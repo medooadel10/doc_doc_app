@@ -1,3 +1,4 @@
+import 'package:doc_doc_app/core/local_storage/shared_prefereneces_helper.dart';
 import 'package:doc_doc_app/core/networking/api_constants.dart';
 import 'package:doc_doc_app/core/networking/dio_factory.dart';
 import 'package:doc_doc_app/features/login/data/models/login_response_model.dart';
@@ -32,6 +33,7 @@ class RegisterProvider extends ChangeNotifier {
           data: body.toJson(),
         );
         final data = LoginResponseModel.fromJson(response.data);
+        await SharedPreferenecesHelper.setString('token', data.data.token);
         Fluttertoast.showToast(msg: data.message);
       } catch (e) {
         Fluttertoast.showToast(msg: 'Failed to register account');

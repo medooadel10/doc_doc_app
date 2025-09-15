@@ -1,11 +1,14 @@
+import 'package:doc_doc_app/core/local_storage/shared_prefereneces_helper.dart';
 import 'package:doc_doc_app/core/networking/dio_factory.dart';
 import 'package:doc_doc_app/core/router/app_route.dart';
 import 'package:doc_doc_app/core/router/routes.dart';
 import 'package:doc_doc_app/core/style/app_themes.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   DioFactory.init();
+  await SharedPreferenecesHelper.init();
   runApp(const MyApp());
 }
 

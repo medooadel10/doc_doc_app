@@ -1,3 +1,4 @@
+import 'package:doc_doc_app/core/router/routes.dart';
 import 'package:doc_doc_app/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -27,22 +28,14 @@ class HomeHeader extends StatelessWidget {
             ],
           ),
         ),
-        CircleAvatar(
-          backgroundColor: AppColors.text20Color,
-          radius: 20,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Icon(Icons.notifications_outlined, color: AppColors.text100Color),
-              Positioned(
-                right: 3,
-                top: 1,
-                child: CircleAvatar(
-                  radius: 4,
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-            ],
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, Routes.profile);
+          },
+          child: CircleAvatar(
+            backgroundColor: AppColors.text20Color,
+            radius: 20,
+            child: Icon(Icons.person, color: AppColors.text100Color),
           ),
         ),
       ],

@@ -1,4 +1,6 @@
 import 'package:doc_doc_app/core/router/routes.dart';
+import 'package:doc_doc_app/features/appointments/logic/appointments_provider.dart';
+import 'package:doc_doc_app/features/appointments/ui/appointments_screen.dart';
 import 'package:doc_doc_app/features/doctor_details/logic/doctor_details_provider.dart';
 import 'package:doc_doc_app/features/doctor_details/ui/doctor_details_screen.dart';
 import 'package:doc_doc_app/features/doctors/ui/doctors_screen.dart';
@@ -8,6 +10,7 @@ import 'package:doc_doc_app/features/home/ui/home_screen.dart';
 import 'package:doc_doc_app/features/login/logic/login_provider.dart';
 import 'package:doc_doc_app/features/login/ui/login_screen.dart';
 import 'package:doc_doc_app/features/on_boarding/ui/on_boarding_screen.dart';
+import 'package:doc_doc_app/features/profile/ui/profile_screen.dart';
 import 'package:doc_doc_app/features/register/logic/register_provider.dart';
 import 'package:doc_doc_app/features/register/ui/register_screen.dart';
 import 'package:doc_doc_app/features/splash/ui/splash_screen.dart';
@@ -40,7 +43,8 @@ class AppRoute {
           builder: (context) => ChangeNotifierProvider(
             create: (context) => HomeProvider()
               ..getAllSpecializations()
-              ..getAllDoctors(),
+              ..getAllDoctors()
+              ..getUserProfile(),
             child: HomeScreen(),
           ),
         );
@@ -56,6 +60,15 @@ class AppRoute {
           builder: (context) => ChangeNotifierProvider(
             create: (context) => DoctorDetailsProvider(),
             child: DoctorDetailsScreen(doctor: args),
+          ),
+        );
+      case Routes.profile:
+        return MaterialPageRoute(builder: (context) => ProfileScreen());
+      case Routes.appointments:
+        return MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider(
+            create: (context) => AppointmentsProvider()..getAppointments(),
+            child: AppointmentsScreen(),
           ),
         );
       default:

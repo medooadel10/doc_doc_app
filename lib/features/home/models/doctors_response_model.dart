@@ -49,7 +49,7 @@ class DoctorModel {
     name: json['name'],
     email: json['email'],
     phone: json['phone'],
-    gender: 'gender',
+    gender: json['gender'],
     address: json['address'],
     description: json['description'],
     degree: json['degree'],

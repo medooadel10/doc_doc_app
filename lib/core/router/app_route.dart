@@ -1,4 +1,6 @@
 import 'package:doc_doc_app/core/router/routes.dart';
+import 'package:doc_doc_app/features/doctor_details/logic/doctor_details_provider.dart';
+import 'package:doc_doc_app/features/doctor_details/ui/doctor_details_screen.dart';
 import 'package:doc_doc_app/features/doctors/ui/doctors_screen.dart';
 import 'package:doc_doc_app/features/home/logic/home_provider.dart';
 import 'package:doc_doc_app/features/home/models/doctors_response_model.dart';
@@ -47,6 +49,14 @@ class AppRoute {
         var args = settings.arguments as List<DoctorModel>;
         return MaterialPageRoute(
           builder: (context) => DoctorsScreen(doctors: args),
+        );
+      case Routes.doctorDetails:
+        var args = settings.arguments as DoctorModel;
+        return MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider(
+            create: (context) => DoctorDetailsProvider(),
+            child: DoctorDetailsScreen(doctor: args),
+          ),
         );
       default:
         return MaterialPageRoute(builder: (context) => Container());

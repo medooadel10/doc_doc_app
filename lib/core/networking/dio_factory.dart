@@ -30,8 +30,13 @@ class DioFactory {
   static Future<Response<dynamic>> postData(
     String path, {
     Map<String, dynamic>? data,
+    String? token,
   }) async {
-    final response = await _dio.post(path, data: data);
+    final response = await _dio.post(
+      path,
+      data: data,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
     return response;
   }
 

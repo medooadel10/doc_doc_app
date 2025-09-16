@@ -7,6 +7,7 @@ class AppColors {
   static Color text20Color = Color(0xffF5F5F5);
   static Color text30Color = Color(0xffEDEDED);
   static Color text50Color = Color(0xffC2C2C2);
+  static Color text60Color = Color(0xff9E9E9E);
   static Color text80Color = Color(0xff616161);
   static Color text100Color = Color(0xff242424);
 }

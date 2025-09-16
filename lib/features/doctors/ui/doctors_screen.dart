@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doc_doc_app/core/router/routes.dart';
 import 'package:doc_doc_app/core/style/app_colors.dart';
 import 'package:doc_doc_app/core/widgets/custom_text_field.dart';
 import 'package:doc_doc_app/features/home/models/doctors_response_model.dart';
@@ -62,51 +63,60 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
             ),
             Expanded(
               child: ListView.separated(
-                itemBuilder: (context, index) => Row(
-                  spacing: 10,
-                  children: [
-                    Container(
-                      width: 110,
-                      height: 110,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: AppColors.text50Color,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.doctorDetails,
+                      arguments: filteredDoctors[index],
+                    );
+                  },
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      Container(
+                        width: 110,
+                        height: 110,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.text50Color,
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP9VcMn-KypOVElikk37BvVvHZHMnoOO44Lg&s',
+                          fit: BoxFit.cover,
+                          errorWidget: (context, url, error) {
+                            return Icon(Icons.error, color: Colors.black);
+                          },
+                        ),
                       ),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP9VcMn-KypOVElikk37BvVvHZHMnoOO44Lg&s',
-                        fit: BoxFit.cover,
-                        errorWidget: (context, url, error) {
-                          return Icon(Icons.error, color: Colors.black);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 8,
-                        children: [
-                          Text(
-                            filteredDoctors[index].name,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.text100Color,
-                              fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 8,
+                          children: [
+                            Text(
+                              filteredDoctors[index].name,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: AppColors.text100Color,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            '${filteredDoctors[index].specialization.name} | ${filteredDoctors[index].degree}',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: AppColors.bodyColor,
-                              fontWeight: FontWeight.w500,
+                            Text(
+                              '${filteredDoctors[index].specialization.name} | ${filteredDoctors[index].degree}',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.bodyColor,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 separatorBuilder: (context, index) => SizedBox(height: 14),
                 itemCount: filteredDoctors.length,

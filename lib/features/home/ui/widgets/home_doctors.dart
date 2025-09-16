@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doc_doc_app/core/router/routes.dart';
 import 'package:doc_doc_app/core/style/app_colors.dart';
+import 'package:doc_doc_app/features/doctors/ui/doctors_screen.dart';
 import 'package:doc_doc_app/features/home/logic/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +27,16 @@ class HomeDoctors extends StatelessWidget {
                     ),
                   ),
                 ),
-                TextButton(onPressed: () {}, child: Text('See All')),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.doctors,
+                      arguments: value.doctors,
+                    );
+                  },
+                  child: Text('See All'),
+                ),
               ],
             ),
             ListView.separated(
@@ -78,7 +89,7 @@ class HomeDoctors extends StatelessWidget {
                 ],
               ),
               separatorBuilder: (context, index) => SizedBox(height: 14),
-              itemCount: 6,
+              itemCount: value.doctors.length > 6 ? 6 : 0,
             ),
           ],
         );

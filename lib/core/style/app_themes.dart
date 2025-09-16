@@ -9,7 +9,12 @@ class AppThemes {
     ),
     fontFamily: 'Inter',
     appBarTheme: AppBarThemeData(
-      titleTextStyle: TextStyle(fontFamily: 'Inter'),
+      titleTextStyle: TextStyle(
+        fontFamily: 'Inter',
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),
     ),
   );
 }

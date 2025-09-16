@@ -1,5 +1,7 @@
 import 'package:doc_doc_app/core/router/routes.dart';
+import 'package:doc_doc_app/features/doctors/ui/doctors_screen.dart';
 import 'package:doc_doc_app/features/home/logic/home_provider.dart';
+import 'package:doc_doc_app/features/home/models/doctors_response_model.dart';
 import 'package:doc_doc_app/features/home/ui/home_screen.dart';
 import 'package:doc_doc_app/features/login/logic/login_provider.dart';
 import 'package:doc_doc_app/features/login/ui/login_screen.dart';
@@ -39,6 +41,12 @@ class AppRoute {
               ..getAllDoctors(),
             child: HomeScreen(),
           ),
+        );
+
+      case Routes.doctors:
+        var args = settings.arguments as List<DoctorModel>;
+        return MaterialPageRoute(
+          builder: (context) => DoctorsScreen(doctors: args),
         );
       default:
         return MaterialPageRoute(builder: (context) => Container());
